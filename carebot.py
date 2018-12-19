@@ -14,11 +14,11 @@ mastodon = Mastodon(
 
 
 def select_message():
-    with open(MESSAGES_FILE, 'r', encoding='UTF-8') as message, open(RECENT_FILE, 'w+', encoding='UTF-8') as recent:
-        lines = message.readlines()
-        status = choice(lines)
-        while status in recent:
-            status = choice(lines)
+    with open(MESSAGES_FILE, 'r+', encoding='UTF-8') as message, open(RECENT_FILE, 'r+', encoding='UTF-8') as recent:
+        m_lines, r_lines = message.readlines(), recent.readlines()
+        status = choice(m_lines)
+        while status in r_lines:
+            status = choice(m_lines)
         recent.write(status)
         return status
 
