@@ -19,8 +19,10 @@ def select_message():
         status = choice(m_lines)
         while status in r_lines:
             status = choice(m_lines)
+    with open(RECENT_FILE, 'w+', encoding='UTF-8') as recent:
+        recent.writelines(r_lines[1:])
         recent.write(status)
-        return status
+    return status
 
 
 def toot():  # A 'toot' is mastodon's version of a tweet or status post
